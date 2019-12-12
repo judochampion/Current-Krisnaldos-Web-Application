@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Details";
+}
+
+@model AlbumModel
+
+<div class="popup-gallery">
+
+    @foreach (Picture lovP in Model.Pictures)
+    {
+
+        <a href="@lovP.UltimateSource" title="@lovP.RawFileNameWithoutExtension"><img src="@lovP.UltimateSource" height="75"></a>
+    }
+</div>

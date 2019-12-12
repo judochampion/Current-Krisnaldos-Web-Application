@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace WebApplication4
 {
@@ -37,21 +40,42 @@ namespace WebApplication4
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\seed")),
+                RequestPath = new PathString("/seed")
+            });
+
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                /*Historical re-route*/
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "Albums",
+                    pattern: "Albums/Details/{*albumnaam}",
+                    defaults: new { controller = "Album", action = "Details" }
+                );
+
+                /*Better re-route*/
+                endpoints.MapControllerRoute(
+                    name: "AlbumsBetterReroute",
+                    pattern: "Albums/{*albumnaam}",
+                    defaults: new { controller = "Album", action = "Details" }
+                );
 
                 endpoints.MapControllerRoute(
                     name: "Albums",
                     pattern: "Albums/",
                     defaults: new { controller = "Album", action = "Index" }
                 );
+
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

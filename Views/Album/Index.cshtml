@@ -1,5 +1,29 @@
 ﻿@{
     ViewData["Title"] = "Albums";
+
 }
 
-<p>Hier komen alle albums van matchen en de quiz-edities.</p>
+@model AlbumInfo
+
+<div class="row">
+
+    @foreach (AlbumInfoAlbum album in Model.Albums)
+    {
+        string lovFullPictureSource = "\"http://www.krisnaldos.be/seed/albums/thumbnails/" + album.RawName + "-bg.jpg\"";
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow border-secondary">
+                <div style="height:200px;">
+                    <div style="height:200px;display:block;background-image:url(@lovFullPictureSource.ToString());"></div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@album.DisplayName</h5>
+                    <p class="card-text text-muted small">@album.Time.Day/@album.Time.Month/@album.Time.Year</p>
+                    <small class="card-text">@album.Intro</small>
+                </div>
+                <div class="card-footer">
+                    <a href="/Albums/@album.RawName" class="stretched-link">Bekijk album</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
