@@ -23,10 +23,10 @@ namespace WebApplication4.Controllers
             _env = env;
         }
 
-        private AlbumInfo GetOrderedAlbumInfo()
+        private AlbumInfo GetOrderedAlbumInfo(string lovCrucialWord = "albuminfo")
         {
             string lovWebRootPath = _env.WebRootPath;
-            string lovFullFilePath = lovWebRootPath + @"\seed\albums\albuminfo.xml";
+            string lovFullFilePath = lovWebRootPath + @"\seed\albums\" + lovCrucialWord + ".xml";
             XmlSerializer ser = new XmlSerializer(typeof(AlbumInfo));
             AlbumInfo lovAlbumInfo = null;
             using (FileStream fs = new FileStream(lovFullFilePath, FileMode.Open))
@@ -84,11 +84,21 @@ namespace WebApplication4.Controllers
             return View(GetOrderedAlbumInfo());
         }
 
+        public IActionResult QuizIndex()
+        {
+            return View("Index", GetOrderedAlbumInfo("albuminfo-quiz"));
+        }
+
+        public IActionResult MatchIndex()
+        {
+            return View("Index", GetOrderedAlbumInfo("albuminfo-matchen"));
+        }
+
         public IActionResult Details(string albumnaam)
         {
             if (String.IsNullOrWhiteSpace(albumnaam))
             {
-                return View("Index", GetOrderedAlbumInfo());
+                return View("Index", GetOrderedAlbumInfo("albuminfo-quiz"));
             }
 
             AlbumModel lovAlbum = new AlbumModel(albumnaam);

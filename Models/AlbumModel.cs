@@ -31,7 +31,7 @@ namespace WebApplication4.Models
         {
             get
             {
-                return @"http://www.krisnaldos.be/seed/albums/" + Album.RawName + @"/compressed/" + RawFileName;
+                return @"http://www.krisnaldos.be/seed/albums/" + Album.RawName + @"/" + RawFileName;
             }
         }
 

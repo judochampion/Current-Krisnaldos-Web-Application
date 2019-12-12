@@ -55,6 +55,27 @@ namespace WebApplication4
             {
                 /*Historical re-route*/
                 endpoints.MapControllerRoute(
+                    name: "MailGenerator",
+                    pattern: "MailGenerator",
+                    defaults: new { controller = "Sponsor", action = "Voorbeeldmail" }
+                );
+
+                /*Historical re-route*/
+                endpoints.MapControllerRoute(
+                    name: "MatchAlbums",
+                    pattern: "MatchAlbums",
+                    defaults: new { controller = "Album", action = "MatchIndex" }
+                );
+
+                /*Historical re-route*/
+                endpoints.MapControllerRoute(
+                    name: "QuizAlbums",
+                    pattern: "QuizAlbums",
+                    defaults: new { controller = "Album", action = "QuizIndex" }
+                );
+
+                /*Historical re-route*/
+                endpoints.MapControllerRoute(
                     name: "Albums",
                     pattern: "Albums/Details/{*albumnaam}",
                     defaults: new { controller = "Album", action = "Details" }
@@ -65,12 +86,6 @@ namespace WebApplication4
                     name: "AlbumsBetterReroute",
                     pattern: "Albums/{*albumnaam}",
                     defaults: new { controller = "Album", action = "Details" }
-                );
-
-                endpoints.MapControllerRoute(
-                    name: "Albums",
-                    pattern: "Albums/",
-                    defaults: new { controller = "Album", action = "Index" }
                 );
 
                 endpoints.MapControllerRoute(

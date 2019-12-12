@@ -5,10 +5,13 @@
 @model AlbumModel
 
 <div class="popup-gallery">
+    <div class="card-columns">
 
-    @foreach (Picture lovP in Model.Pictures)
-    {
-
-        <a href="@lovP.UltimateSource" title="@lovP.RawFileNameWithoutExtension"><img src="@lovP.UltimateSource" height="75"></a>
-    }
+        @foreach (Picture lovP in Model.Pictures)
+        {
+            <div class="card">
+                <a href="@lovP.UltimateSource" title="@lovP.RawFileNameWithoutExtension"><img src="@lovP.UltimateSource" width="100%"></a>
+            </div>
+        }
+    </div>
 </div>
