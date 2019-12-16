@@ -60,6 +60,12 @@ namespace WebApplication4
                     defaults: new { controller = "Sponsor", action = "Voorbeeldmail" }
                 );
 
+                endpoints.MapControllerRoute(
+                    name: "Sponsors",
+                    pattern: "Sponsors",
+                    defaults: new { controller = "Sponsor", action = "Index" }
+                );
+
                 /*Historical re-route*/
                 endpoints.MapControllerRoute(
                     name: "MatchAlbums",

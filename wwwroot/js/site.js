@@ -22,3 +22,21 @@ $(document).ready(function () {
 		}
 	});
 });
+
+$(document).ready(function () {
+	$('#prijs-vorig-jaar').hide();
+	$('#prijs-voorstel-vraag').hide();
+
+	$("input[name='options']").change(function () {
+		var test = $(this).val();
+
+		if (test == 'nieuw') {
+			$('#prijs-vorig-jaar').hide();
+			$('#prijs-voorstel-vraag').hide();
+		}
+		else {
+			$('#prijs-vorig-jaar').show();
+			$('#prijs-voorstel-vraag').show();
+		}
+	});
+});

@@ -7,34 +7,51 @@
     ViewData["Title"] = "Voorbeeldmail";
 }
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-
+<style type="text/css">
+    .btn.btn-secondary.active {
+        font-weight: bold;
+        background-color: forestgreen !important;
+        border-color: white !important;
+    }
+</style>
 <div ng-app="">
 
-    <div class="col-md-12">
-        <div class="alert alert-warning">
+    <div class="alert alert-warning">
+        <form>
+
             <p>Vul hier eerst de variabele gegevens in</p>
 
-            <p>Voorstel voor prijs van deze sponsor: <input type="text" ng-model="prijsvoorstel"></p>
-            <p>Bedrijfsnaam: <input type="text" ng-model="bedrijfsnaam"></p>
-            <p>Afzendernaam: <input type="text" ng-model="afzendernaam"></p>
-            <p>GSM nummer (zonder +32 en zonder nul, vb. 477069583):<input type="text" ng-model="gsmnummer"></p>
-            <p>Eventuele extra aanspreking:<input type="text" ng-model="extraaanspreking"></p>
-        </div>
-        <div class="alert alert-success">
-            Hieronder kan je het resultaat zien dat je dan kan knippen en in je GMail te plakken of in het contactformuliertje van hun website.
-            <b>
-                Vergeet aub niet de Exel aan te vullen via <a target="_blank" href="https://docs.google.com/spreadsheets/d/1hjoxjsXcH5NMuhkC5xAooxx6lto2bVmcJTXoPmv2-cY/edit?usp=sharing">deze link</a>.
-            </b>
-        </div>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked value="nieuw"> Nieuwe Sponsor
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="option2" autocomplete="off" value="oud"> Oude Sponsor
+                </label>
+            </div>
+
+            <p id="prijs-voorstel-vraag" class="mt-1" style="color:red;">Wat hebben we vorig jaar gekregen van deze sponsor:	&nbsp;	&nbsp; <input type="text" ng-model="prijsvoorstel"></p>
+            <p class="mt-5">Bedrijfsnaam:	&nbsp;	&nbsp;<input type="text" ng-model="bedrijfsnaam"></p>
+            <p>Afzendernaam: 	&nbsp;	&nbsp;<input type="text" ng-model="afzendernaam"></p>
+            <p>GSM nummer (zonder +32 en zonder nul, vb. 477069583):	&nbsp;	&nbsp;<input type="text" ng-model="gsmnummer"></p>
+            <p>Eventuele extra aanspreking:	&nbsp;	&nbsp;<input type="text" ng-model="extraaanspreking"></p>
+        </form>
+    </div>
+
+    <div class="alert alert-success">
+        Hieronder kan je het resultaat zien dat je dan kan knippen en in je GMail te plakken of in het contactformuliertje van hun website.
+        <b>
+            Vergeet aub niet de Exel aan te vullen via <a target="_blank" href="https://docs.google.com/spreadsheets/d/1hjoxjsXcH5NMuhkC5xAooxx6lto2bVmcJTXoPmv2-cY/edit?usp=sharing">deze link</a>.
+        </b>
     </div>
     <hr />
-    <div id="myInput">
+    <div>
         <p>Geachte <span ng-bind="extraaanspreking"></span>,</p>
         <p>Op zaterdagavond 22 februari 2020 in zaal De Gulden Zonne te Hooglede organiseren we de 6de editie van een algemene quiz met onze voetbalploeg ("De Krisnaldos"), die uitkomt in het Roeselaars Liefhebbersvoetbal. We verwachten voor deze quiz een aanwezigheid van 200 &agrave; 250 personen, verdeeld over 50 teams (dit jaar verhoogd van 38 naar 50, aangezien we door de grote interesse een grotere zaal hebben geboekt). </p>
-        <p>
-            De prijzen kunnen variëren van kleine gadgets tot iets meer waardevolle prijzen voor de winnaars. We rekenen elk jaar op sponsors om die prijzen te voorzien, <span ng-bind="prijsvoorstel"></span> zou(den) bijvoorbeeld ideaal zijn. In ruil daarvoor krijgt het logo van de sponsors steevast een plaatsje op de antwoordfomulieren, drankkaarten en presentatie zelf. Als sponsor van de quiz krijgt u ook <b>extra zichtbaarheid op onze website.</b>
+        <p>De prijzen kunnen variëren van kleine gadgets tot iets meer waardevolle prijzen voor de winnaars. We rekenen elk jaar op sponsors om die prijzen te voorzien.In ruil daarvoor krijgt het logo van de sponsors steevast een plaatsje op de antwoordfomulieren, drankkaarten en presentatie zelf. Als sponsor van de quiz krijgt u ook <b>extra zichtbaarheid op onze website</b> via <a href="http://krisnaldos.be/sponsors">onze sponsorpagina</a>.</p>
+        <p id="prijs-vorig-jaar">
+            Vorig jaar mochten we <span ng-bind="prijsvoorstel"></span> ontvangen van jullie, waarvoor dank.
         </p>
-
         <p>
             Hieronder vindt u de link naar het Facebook evenement en de foto&acute;s van de voorbij vijf edities:
             <ul>
