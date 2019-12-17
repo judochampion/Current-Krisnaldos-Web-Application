@@ -18,9 +18,7 @@
 
     <div class="alert alert-warning">
         <form>
-
             <p>Vul hier eerst de variabele gegevens in</p>
-
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-secondary active">
                     <input type="radio" name="options" id="option1" autocomplete="off" checked value="nieuw"> Nieuwe Sponsor
@@ -32,8 +30,8 @@
 
             <p id="prijs-voorstel-vraag" class="mt-1" style="color:red;">Wat hebben we vorig jaar gekregen van deze sponsor:	&nbsp;	&nbsp; <input type="text" ng-model="prijsvoorstel"></p>
             <p class="mt-5">Bedrijfsnaam:	&nbsp;	&nbsp;<input type="text" ng-model="bedrijfsnaam"></p>
-            <p>Afzendernaam: 	&nbsp;	&nbsp;<input type="text" ng-model="afzendernaam"></p>
-            <p>GSM nummer (zonder +32 en zonder nul, vb. 477069583):	&nbsp;	&nbsp;<input type="text" ng-model="gsmnummer"></p>
+            <p>Eigen naam: 	&nbsp;	&nbsp;<input type="text" ng-model="afzendernaam"></p>
+            <p>GSM nummer (zonder +32 en zonder nullen of spaties, vb. 477069583):	&nbsp;	&nbsp;<input id="gsmnummer-ingegeven" type="text"></p>
             <p>Eventuele extra aanspreking:	&nbsp;	&nbsp;<input type="text" ng-model="extraaanspreking"></p>
         </form>
     </div>
@@ -48,7 +46,7 @@
     <div>
         <p>Geachte <span ng-bind="extraaanspreking"></span>,</p>
         <p>Op zaterdagavond 22 februari 2020 in zaal De Gulden Zonne te Hooglede organiseren we de 6de editie van een algemene quiz met onze voetbalploeg ("De Krisnaldos"), die uitkomt in het Roeselaars Liefhebbersvoetbal. We verwachten voor deze quiz een aanwezigheid van 200 &agrave; 250 personen, verdeeld over 50 teams (dit jaar verhoogd van 38 naar 50, aangezien we door de grote interesse een grotere zaal hebben geboekt). </p>
-        <p>De prijzen kunnen variëren van kleine gadgets tot iets meer waardevolle prijzen voor de winnaars. We rekenen elk jaar op sponsors om die prijzen te voorzien.In ruil daarvoor krijgt het logo van de sponsors steevast een plaatsje op de antwoordfomulieren, drankkaarten en presentatie zelf. Als sponsor van de quiz krijgt u ook <b>extra zichtbaarheid op onze website</b> via <a href="http://krisnaldos.be/sponsors">onze sponsorpagina</a>.</p>
+        <p>De prijzen kunnen variëren van kleine gadgets tot iets meer waardevolle prijzen voor de winnaars. We rekenen elk jaar op sponsors om die prijzen te voorzien. In ruil daarvoor krijgt het logo van de sponsors steevast een plaatsje op de antwoordformulieren, drankkaarten en presentatie zelf. Als sponsor van de quiz krijgt u ook <b>extra zichtbaarheid op onze website</b> via <a href="http://krisnaldos.be/sponsors">onze sponsorpagina</a>.</p>
         <p id="prijs-vorig-jaar">
             Vorig jaar mochten we <span ng-bind="prijsvoorstel"></span> ontvangen van jullie, waarvoor dank.
         </p>
@@ -70,7 +68,8 @@
             Met vriendelijke groeten,<br />
             <span ng-bind="afzendernaam"></span>
             <br />
-            <i>Bereikbaar op dit e-mailadres of via het GSM-nummer +32 <span ng-bind="gsmnummer"></span></i>
+            <div></div>
+            <i>Bereikbaar op dit e-mailadres of via het GSM-nummer +32 <span id="gsmnummer-bewerkt"></span></i>.
         </p>
     </div>
 </div>

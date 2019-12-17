@@ -26,7 +26,7 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$('#prijs-vorig-jaar').hide();
 	$('#prijs-voorstel-vraag').hide();
-
+	//$('#gsmnummer-bewerkt').hide();
 	$("input[name='options']").change(function () {
 		var test = $(this).val();
 
@@ -38,5 +38,25 @@ $(document).ready(function () {
 			$('#prijs-vorig-jaar').show();
 			$('#prijs-voorstel-vraag').show();
 		}
+	});
+
+	$('#gsmnummer-ingegeven').on('input', function () {
+		var ar = []; 0
+		var ar = $('#gsmnummer-ingegeven').val().split('');
+		ar = ar.filter(function (str) { return /\S/.test(str); })
+		var bewerkt = '';
+		if (ar.length > 2) {
+			bewerkt = bewerkt + ar[0] + ar[1] + ar[2];
+		}
+		if (ar.length > 4) {
+			bewerkt = bewerkt + ' ' + ar[3] + ar[4];
+		}
+		if (ar.length > 6) {
+			bewerkt = bewerkt + ' ' + ar[5] + ar[6];
+		}
+		if (ar.length > 8) {
+			bewerkt = bewerkt + ' ' + ar[7] + ar[8];
+		}
+		$('#gsmnummer-bewerkt').text(bewerkt);
 	});
 });
