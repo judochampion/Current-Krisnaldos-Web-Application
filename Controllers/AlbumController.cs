@@ -72,7 +72,7 @@ namespace WebApplication4.Controllers
         private List<string> GetFileNames(string povAlbumNaam)
         {
             string lovWebRootPath = _env.WebRootPath;
-            string lovFullFolderPath = lovWebRootPath + @"\seed\albums\" + povAlbumNaam + @"\compressed\";
+            string lovFullFolderPath = lovWebRootPath + @"\seed\albums\" + povAlbumNaam + @"\";
             List<string> lovArray = Directory.GetFiles(lovFullFolderPath).ToList();
             List<string> lovReturnList = new List<string>();
             lovArray.ForEach(s => lovReturnList.Add(Path.GetFileName(s)));
@@ -101,7 +101,7 @@ namespace WebApplication4.Controllers
                 return View("Index", GetOrderedAlbumInfo("albuminfo-quiz"));
             }
 
-            AlbumModel lovAlbum = new AlbumModel(albumnaam);
+            Album lovAlbum = new Album(albumnaam);
 
             foreach (string s in GetFileNames(albumnaam))
             {

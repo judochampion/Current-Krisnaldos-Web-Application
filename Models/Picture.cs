@@ -3,20 +3,9 @@ using System.IO;
 
 namespace WebApplication4.Models
 {
-    public class AlbumModel
-    {
-        public string RawName { get; set; }
-        public List<Picture> Pictures { get; set; } = new List<Picture>();
-
-        public AlbumModel(string povRawName)
-        {
-            RawName = povRawName;
-        }
-    }
-
     public class Picture
     {
-        public AlbumModel Album { get; set; }
+        public Album Album { get; set; }
         public string RawFileName { get; set; }
 
         public string RawFileNameWithoutExtension
@@ -35,7 +24,7 @@ namespace WebApplication4.Models
             }
         }
 
-        public Picture(AlbumModel povAlbum, string povRawFileName)
+        public Picture(Album povAlbum, string povRawFileName)
         {
             Album = povAlbum;
             RawFileName = povRawFileName;

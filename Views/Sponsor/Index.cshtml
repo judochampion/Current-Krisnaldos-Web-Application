@@ -2,41 +2,24 @@
     ViewData["Title"] = "Sponsors";
 
 }
-<div class="row">
+@model SponsorListObject
+
+<div class="row m-0">
     <h3>Dankuwel, sponsors!</h3>
     <div>
-        Hier vind je <b>een overzicht van de @*@ViewBag.NumberOfSponsors*@ sponsors</b> die ons steunden om voor de voorbije quiz (22 februari 2020) een mooie prijzentafel samen te stellen. Je kan doorklikken naar hun website door op het juiste logo te klikken. De Krisnaldo's danken alle @*@ViewBag.NumberOfSponsors*@ sponsors, want dankzij jullie gaat geen enkele deelnemer met lege handen naar huis.
+        Hier vind je <b>een overzicht van de @Model.NumberOfSponsors sponsors</b> die ons steunden om op de quiz (22 februari 2020) een mooie prijzentafel samen te stellen. Je kan doorklikken naar hun website door op het juiste logo te klikken. De Krisnaldo's danken alle @Model.NumberOfSponsors sponsors, want dankzij jullie gaat geen enkele deelnemer met lege handen naar huis.
     </div>
     <hr />
 </div>
 
-<div class="row">
+<div class="row m-0">
     <div class="card-columns">
 
-        @*@foreach (Picture lovP in Model.Pictures)
-            {*@
-        <div class="card border-0">
-            <a href="http://www.meatandmore.be" title="Meat and More"><img src="https://www.meatandmore.be/themes/custom/calibr8_meatandmore/logo.svg" width="100%"></a>
-        </div>
-        @*}*@
-    </div>
-    @*@foreach (AlbumInfoAlbum album in Model.Albums)
+        @foreach (Sponsor lovSponsor in Model.Sponsors)
         {
-            string lovFullPictureSource = "\"http://www.krisnaldos.be/seed/albums/thumbnails/" + album.RawName + "-bg.jpg\"";
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow border-secondary">
-                    <div style="height:200px;">
-                        <div style="height:200px;display:block;background-image:url(@lovFullPictureSource.ToString());"></div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">@album.DisplayName</h5>
-                        <p class="card-text text-muted small">@album.Time.Day/@album.Time.Month/@album.Time.Year</p>
-                        <small class="card-text">@album.Intro</small>
-                    </div>
-                    <div class="card-footer">
-                        <a href="/Albums/@album.RawName" class="stretched-link">Bekijk album</a>
-                    </div>
-                </div>
-            </div>
-        }*@
+        <div class="card border-0 m-1 p-1">
+            <a href="@lovSponsor.Link" title="@lovSponsor.DisplayName"><img src="@lovSponsor.UltimateSource" style="width:100%;display:block;"></a>
+        </div>
+        }
+    </div>
 </div>

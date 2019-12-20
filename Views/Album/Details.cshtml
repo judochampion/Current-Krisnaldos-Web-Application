@@ -2,16 +2,16 @@
     ViewData["Title"] = "Details";
 }
 
-@model AlbumModel
+@model Album
 
 <div class="popup-gallery">
     <div class="card-columns">
 
         @foreach (Picture lovP in Model.Pictures)
         {
-            <div class="card">
-                <a href="@lovP.UltimateSource" title="@lovP.RawFileNameWithoutExtension"><img src="@lovP.UltimateSource" width="100%"></a>
-            </div>
+        <div class="card">
+            <a href="@lovP.UltimateSource" title="@lovP.RawFileNameWithoutExtension"><img src="@lovP.UltimateSource" width="100%"></a>
+        </div>
         }
     </div>
 </div>
