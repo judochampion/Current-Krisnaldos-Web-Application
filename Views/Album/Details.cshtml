@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Album ● " + Model.EffectiveDisplayName;
 }
 
 @model Album
@@ -9,9 +9,9 @@
 
         @foreach (Picture lovP in Model.Pictures)
         {
-        <div class="card">
-            <a href="@lovP.UltimateSource" title="@lovP.RawFileNameWithoutExtension"><img src="@lovP.UltimateSource" width="100%"></a>
-        </div>
+            <div class="card">
+                <a href="@lovP.UltimateSource" title="@lovP.RawFileNameWithoutExtension"><img src="@lovP.UltimateSource" width="100%"></a>
+            </div>
         }
     </div>
 </div>

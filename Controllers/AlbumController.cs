@@ -106,6 +106,12 @@ namespace WebApplication4.Controllers
             foreach (string s in GetFileNames(albumnaam))
             {
                 lovAlbum.Pictures.Add(new Picture(lovAlbum, s));
+                AlbumInfo lovAlbumInfo = GetOrderedAlbumInfo();
+                List<AlbumInfoAlbum> lovList = lovAlbumInfo.Albums.Where(a => a.RawName == albumnaam).ToList();
+                if (lovList.Count == 1)
+                {
+                    lovAlbum.DisplayName = lovList.First().DisplayName;
+                }
             }
 
             //var album = await _context.Album
