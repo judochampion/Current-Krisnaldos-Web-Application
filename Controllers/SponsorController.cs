@@ -8,10 +8,10 @@ namespace WebApplication4.Controllers
 {
     public class SponsorController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<SponsorController> _logger;
         private readonly IWebHostEnvironment _env;
 
-        public SponsorController(ILogger<HomeController> logger, IWebHostEnvironment env)
+        public SponsorController(ILogger<SponsorController> logger, IWebHostEnvironment env)
         {
             _logger = logger;
             _env = env;

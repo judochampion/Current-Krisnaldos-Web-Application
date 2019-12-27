@@ -14,7 +14,12 @@
     "minify": {
       "enabled": true,
       "renameLocals": true
-    },
-    "sourceMap": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/lib/magnific-popup/dist/js/jquery.magnific-popup.min.js",
+    "inputFiles": [
+      "wwwroot/lib/magnific-popup/dist/js/jquery.magnific-popup.js"
+    ]
   }
 ]
