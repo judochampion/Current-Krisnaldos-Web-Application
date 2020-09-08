@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
@@ -14,10 +15,29 @@ namespace WebApplication4.Models
     {
         public DateTime Tijdstip { get; }
 
+        public const string EigenNaam = "De Krisnaldos's";
+
         public MatchSide MatchSide { get; }
         public MatchType MatchType { get; }
 
         public string Tegenstander { get; }
+
+        public string DagDisplay => Tijdstip.ToString("D", CultureInfo.CreateSpecificCulture("nl-NL"));
+
+        public string UurDisplay => Tijdstip.ToString("t", CultureInfo.CreateSpecificCulture("nl-NL"));
+
+        public string MatchDisplay
+        {
+            get
+            {
+                if (MatchSide == MatchSide.Thuis)
+                {
+                    return EigenNaam + " - " + Tegenstander;
+                }
+
+                return Tegenstander + " - " + EigenNaam;
+            }
+        }
 
         public CalendarEvent(string[] lovStringArray)
         {
