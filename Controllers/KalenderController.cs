@@ -38,7 +38,7 @@ namespace WebApplication4.Controllers
             var lovList = new List<CalendarEvent>();
             var serviceValues = GetSheetsService().Spreadsheets.Values;
             var response = await serviceValues.Get(SpreadsheetId, ReadRange).ExecuteAsync();
-            foreach (var lovRow in response.Values)
+            foreach (var lovRow in response.Values.Skip(1))
             {
                 string[] lovString = new string[lovRow.Count];
                 for (int i = 0; i < lovString.Count(); i++)
@@ -57,7 +57,7 @@ namespace WebApplication4.Controllers
            Sheet1 - tab name in a spreadsheet
            A:B     - range of values we want to receive
         */
-        private const string ReadRange = "Blad1!A:H";
+        private const string ReadRange = "Blad1!A:J";
 
         private static SheetsService GetSheetsService()
         {

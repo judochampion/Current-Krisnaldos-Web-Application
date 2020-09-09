@@ -11,11 +11,11 @@ namespace WebApplication4.Models
 
     public enum MatchType { Friendly, Competitie, Beker }
 
-    public class CalendarEvent
+    public class CalendarEvent : IComparable
     {
         public DateTime Tijdstip { get; }
 
-        public const string EigenNaam = "De Krisnaldos's";
+        public const string EigenNaam = "De Krisnaldo's";
 
         public MatchSide MatchSide { get; }
         public MatchType MatchType { get; }
@@ -25,6 +25,43 @@ namespace WebApplication4.Models
         public string DagDisplay => Tijdstip.ToString("D", CultureInfo.CreateSpecificCulture("nl-NL"));
 
         public string UurDisplay => Tijdstip.ToString("t", CultureInfo.CreateSpecificCulture("nl-NL"));
+
+        public string LocatieDisplay
+        {
+            get
+            {
+                if (MatchSide == MatchSide.Thuis)
+                {
+                    return "Ardooie";
+                }
+                else
+                {
+                    return "?";
+                }
+            }
+        }
+
+        public int Our_Score { get; }
+        public int Their_Score { get; }
+
+        public string ClassColor
+        {
+            get
+            {
+                if (Our_Score > Their_Score)
+                {
+                    return "circle_green";
+                }
+                else if (Our_Score == Their_Score)
+                {
+                    return "circle_yellow";
+                }
+                else
+                {
+                    return "circle_red";
+                }
+            }
+        }
 
         public string MatchDisplay
         {
@@ -36,6 +73,19 @@ namespace WebApplication4.Models
                 }
 
                 return Tegenstander + " - " + EigenNaam;
+            }
+        }
+
+        public string ScoreDisplay
+        {
+            get
+            {
+                if (MatchSide == MatchSide.Thuis)
+                {
+                    return Our_Score + " - " + Their_Score;
+                }
+
+                return Their_Score + " - " + Our_Score;
             }
         }
 
@@ -51,6 +101,20 @@ namespace WebApplication4.Models
             MatchType = (MatchType)Enum.Parse(typeof(MatchType), lovStringArray[5], true);
             MatchSide = (MatchSide)Enum.Parse(typeof(MatchSide), lovStringArray[6], true);
             Tegenstander = lovStringArray[7];
+            if (lovStringArray.Length > 8)
+            {
+                Our_Score = Convert.ToInt32(lovStringArray[8]);
+                Their_Score = Convert.ToInt32(lovStringArray[9]);
+            }
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is CalendarEvent)
+            {
+                return Tijdstip.CompareTo(((CalendarEvent)obj).Tijdstip);
+            }
+            return 0;
         }
     }
 }

@@ -4,24 +4,51 @@
 @model KalenderObject
 
 <p>Hieronder vindt u een kalender, handig voor iedere Krisnaldo-fan.</p>
-<table class="table table-striped">
+<table class="table table-striped display" id="kalendertable_future_events" style="width:100%">
     <thead>
         <tr>
             <th>Datum</th>
             <th>Uur</th>
+            <th>Locatie</th>
             <th>Type</th>
             <th>Match</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var lovEvent in Model.KalenderEvents)
+        @foreach (var lovEvent in Model.Future_Events)
         {
-            <tr>
-                <td>@lovEvent.DagDisplay</td>
-                <td>@lovEvent.UurDisplay</td>
-                <td>@lovEvent.MatchType.ToString()</td>
-                <td>@lovEvent.MatchDisplay</td>
-            </tr>
+        <tr>
+            <td>@lovEvent.DagDisplay</td>
+            <td>@lovEvent.UurDisplay</td>
+            <td>@lovEvent.LocatieDisplay</td>
+            <td>@lovEvent.MatchType.ToString()</td>
+            <td>@lovEvent.MatchDisplay</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<br />
+<p>De voorbije wedstrijden vindt u hier.</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Type</th>
+            <th>Match</th>
+            <th>Uitslag</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lovEvent in Model.Past_Events)
+        {
+        <tr>
+            <td>@lovEvent.DagDisplay</td>
+            <td>@lovEvent.MatchType.ToString()</td>
+            <td>@lovEvent.MatchDisplay</td>
+            <td>@lovEvent.ScoreDisplay</td>
+            <td><div class="@lovEvent.ClassColor"></div></td>
+        </tr>
         }
     </tbody>
 </table>
