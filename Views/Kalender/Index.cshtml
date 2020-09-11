@@ -3,35 +3,37 @@
 }
 @model KalenderObject
 
-<p>Hieronder vindt u een kalender, handig voor iedere Krisnaldo-fan.</p>
+<p>Hieronder vindt u een kalender, handig voor iedere Krisnaldo-fan. De klassement-informatie van onze tegenstanders werd dynamisch opgehaald via <a href="http://rlv.be/klassement-reeks-a-2/" target="_blank">deze webpagina</a> van het RLV.</p>
 <div class="table-responsive">
     <table class="table table-bordered table-striped" id="kalendertable_future_events">
         <thead>
             <tr>
-                <th data-priority="8">MatchCode</th>
+                <th data-priority="9">Code</th>
                 <th data-priority="2">Datum</th>
-                <th data-priority="4">Uur</th>
-                <th data-priority="6">Locatie</th>
-                <th data-priority="7">Adres</th>
-                <th data-priority="5">Type</th>
-                <th data-priority="3">Kant</th>
+                <th data-priority="3">Uur</th>
+                <th data-priority="7">Locatie</th>
+                <th data-priority="8">Adres</th>
+                <th data-priority="6">Type</th>
+                <th data-priority="4">Kant</th>
                 <th data-priority="1">Tegenstander</th>
+                <th data-priority="5">Klassement</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var lovEvent in Model.Future_Events)
-        {
-            <tr>
-                <td>@lovEvent.MatchCode</td>
-                <td>@lovEvent.DagDisplay</td>
-                <td>@lovEvent.UurDisplay</td>
-                <td>@lovEvent.LocatieDisplay</td>
-                <td>@lovEvent.AdresDisplay</td>
-                <td>@lovEvent.MatchType.ToString()</td>
-                <td>@lovEvent.MatchSide.ToString()</td>
-                <td>@lovEvent.Tegenstander</td>
-            </tr>
-        }
+            {
+                <tr>
+                    <td>@lovEvent.MatchCode</td>
+                    <td>@lovEvent.DagDisplay</td>
+                    <td>@lovEvent.UurDisplay</td>
+                    <td>@lovEvent.LocatieDisplay</td>
+                    <td>@lovEvent.AdresDisplay</td>
+                    <td>@lovEvent.MatchType.ToString()</td>
+                    <td>@lovEvent.MatchSide.ToString()</td>
+                    <td>@lovEvent.Tegenstander</td>
+                    <td>@lovEvent.TegenstanderKlassementDisplayTotaal</td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
@@ -50,15 +52,15 @@
         </thead>
         <tbody>
             @foreach (var lovEvent in Model.Past_Events)
-        {
-            <tr>
-                <td>@lovEvent.DagDisplay_Short</td>
-                <td>@lovEvent.MatchType.ToString()</td>
-                <td>@lovEvent.MatchDisplay</td>
-                <td>@lovEvent.ScoreDisplay</td>
-                <td><div class="@lovEvent.ClassColor"></div></td>
-            </tr>
-        }
+            {
+                <tr>
+                    <td>@lovEvent.DagDisplay_Short</td>
+                    <td>@lovEvent.MatchType.ToString()</td>
+                    <td>@lovEvent.MatchDisplay</td>
+                    <td>@lovEvent.ScoreDisplay</td>
+                    <td><div class="@lovEvent.ClassColor"></div></td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

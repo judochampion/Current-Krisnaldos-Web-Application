@@ -30,10 +30,10 @@ namespace WebApplication4.Models
         public string ThuisPloeg => MatchSide == MatchSide.Thuis ? "De Krisnaldo's" : Tegenstander;
 
         public string LocatieDisplay => String.IsNullOrWhiteSpace(Locatie) ? "?" : Locatie;
-        public string Locatie { get; set; }
+        public string Locatie => TegenstanderPloegObject?.Locatie;
 
         public string AdresDisplay => String.IsNullOrWhiteSpace(Adres) ? "?" : Adres;
-        public string Adres { get; set; }
+        public string Adres => TegenstanderPloegObject?.Adres;
 
         public int Our_Score { get; }
         public int Their_Score { get; }
@@ -59,6 +59,14 @@ namespace WebApplication4.Models
 
         public string MatchCode { get; }
 
+        public Ploeg TegenstanderPloegObject { get; set; }
+
+        public string TegenstanderPositieDisplay => String.IsNullOrWhiteSpace(TegenstanderPloegObject?.Positie_In_Klassement) ? "?" : (TegenstanderPloegObject.Positie_In_Klassement == "1" || TegenstanderPloegObject.Positie_In_Klassement == "8" ? TegenstanderPloegObject.Positie_In_Klassement + "ste" : TegenstanderPloegObject.Positie_In_Klassement + "de");
+
+        public string TegenstanderPunten => String.IsNullOrWhiteSpace(TegenstanderPloegObject?.Punten_Aantal) ? "?" : (TegenstanderPloegObject.Punten_Aantal == "1" ? "(1 punt)" : "(" + TegenstanderPloegObject.Punten_Aantal + " punten)");
+
+        public string TegenstanderKlassementDisplayTotaal => $"{TegenstanderPositieDisplay} {TegenstanderPunten}";
+
         public string MatchDisplay
         {
             get
@@ -76,6 +84,8 @@ namespace WebApplication4.Models
         {
             get
             {
+                if (!Score_Known_Yet) return "? - ?";
+
                 if (MatchSide == MatchSide.Thuis)
                 {
                     return Our_Score + " - " + Their_Score;
@@ -84,6 +94,8 @@ namespace WebApplication4.Models
                 return Their_Score + " - " + Our_Score;
             }
         }
+
+        public bool Score_Known_Yet { get; }
 
         public CalendarEvent(string[] lovStringArray)
         {
@@ -102,6 +114,11 @@ namespace WebApplication4.Models
             {
                 Our_Score = Convert.ToInt32(lovStringArray[9]);
                 Their_Score = Convert.ToInt32(lovStringArray[10]);
+                Score_Known_Yet = true;
+            }
+            else
+            {
+                Score_Known_Yet = false;
             }
         }
 

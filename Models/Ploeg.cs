@@ -13,6 +13,10 @@ namespace WebApplication4.Models
 
         public string Adres { get; set; }
 
+        public string Positie_In_Klassement { get; set; }
+
+        public string Punten_Aantal { get; set; }
+
         public Ploeg()
         {
         }

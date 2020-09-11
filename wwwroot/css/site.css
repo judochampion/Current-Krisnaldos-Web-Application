@@ -98,9 +98,5 @@ body {
 }
 
 .dataTables_wrapper {
-    font-size: 0.9em;
-}
-
-.smaller-letter-table {
-    font-size: 0.9em;
+    font-size: 1em;
 }
