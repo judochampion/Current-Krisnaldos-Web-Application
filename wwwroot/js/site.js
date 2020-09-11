@@ -64,9 +64,40 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#kalendertable_future_events').DataTable(
         {
+            responsive: true,
             "ordering": false,
             "pagingType": "simple",
             "lengthMenu": [[10, -1], [10, "Alle"]],
+            "language": {
+                "sProcessing": "Bezig...",
+                "sLengthMenu": "_MENU_ resultaten weergeven",
+                "sZeroRecords": "Geen resultaten gevonden",
+                "sInfo": "_START_ tot _END_ van _TOTAL_ resultaten",
+                "sInfoEmpty": "Geen resultaten om weer te geven",
+                "sInfoFiltered": " (gefilterd uit _MAX_ resultaten)",
+                "sInfoPostFix": "",
+                "sSearch": "Zoeken:",
+                "sEmptyTable": "Geen resultaten aanwezig in de tabel",
+                "sInfoThousands": ".",
+                "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
+                "oPaginate": {
+                    "sFirst": "Eerste",
+                    "sLast": "Laatste",
+                    "sNext": "Volgende",
+                    "sPrevious": "Vorige"
+                }
+            }
+        }
+    );
+});
+$(document).ready(function () {
+    $('#kalendertable_past_events').DataTable(
+        {
+            responsive: true,
+            "ordering": false,
+            "paging": false,
+            "searching": false,
+            "info":false,
             "language": {
                 "sProcessing": "Bezig...",
                 "sLengthMenu": "_MENU_ resultaten weergeven",

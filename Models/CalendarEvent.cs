@@ -23,23 +23,17 @@ namespace WebApplication4.Models
         public string Tegenstander { get; }
 
         public string DagDisplay => Tijdstip.ToString("D", CultureInfo.CreateSpecificCulture("nl-NL"));
+        public string DagDisplay_Short => Tijdstip.ToString("d", CultureInfo.CreateSpecificCulture("nl-NL"));
 
         public string UurDisplay => Tijdstip.ToString("t", CultureInfo.CreateSpecificCulture("nl-NL"));
 
-        public string LocatieDisplay
-        {
-            get
-            {
-                if (MatchSide == MatchSide.Thuis)
-                {
-                    return "Ardooie";
-                }
-                else
-                {
-                    return "?";
-                }
-            }
-        }
+        public string ThuisPloeg => MatchSide == MatchSide.Thuis ? "De Krisnaldo's" : Tegenstander;
+
+        public string LocatieDisplay => String.IsNullOrWhiteSpace(Locatie) ? "?" : Locatie;
+        public string Locatie { get; set; }
+
+        public string AdresDisplay => String.IsNullOrWhiteSpace(Adres) ? "?" : Adres;
+        public string Adres { get; set; }
 
         public int Our_Score { get; }
         public int Their_Score { get; }
@@ -62,6 +56,8 @@ namespace WebApplication4.Models
                 }
             }
         }
+
+        public string MatchCode { get; }
 
         public string MatchDisplay
         {
@@ -101,10 +97,11 @@ namespace WebApplication4.Models
             MatchType = (MatchType)Enum.Parse(typeof(MatchType), lovStringArray[5], true);
             MatchSide = (MatchSide)Enum.Parse(typeof(MatchSide), lovStringArray[6], true);
             Tegenstander = lovStringArray[7];
-            if (lovStringArray.Length > 8)
+            MatchCode = lovStringArray[8];
+            if (lovStringArray.Length > 9)
             {
-                Our_Score = Convert.ToInt32(lovStringArray[8]);
-                Their_Score = Convert.ToInt32(lovStringArray[9]);
+                Our_Score = Convert.ToInt32(lovStringArray[9]);
+                Their_Score = Convert.ToInt32(lovStringArray[10]);
             }
         }
 

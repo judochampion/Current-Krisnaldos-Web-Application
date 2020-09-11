@@ -29,8 +29,10 @@ namespace WebApplication4.Controllers
 
         public async Task<IActionResult> Index()
         {
+            string lovWebRootPath = _env.WebRootPath;
+            string lovRawPathNameToFolder = @"\seed\stadia\locaties.txt";
             var lovList = await GetKalenderEvents();
-            return View(new KalenderObject(lovList));
+            return View(new KalenderObject(lovList, lovWebRootPath, lovRawPathNameToFolder));
         }
 
         private async Task<List<CalendarEvent>> GetKalenderEvents()
@@ -57,7 +59,7 @@ namespace WebApplication4.Controllers
            Sheet1 - tab name in a spreadsheet
            A:B     - range of values we want to receive
         */
-        private const string ReadRange = "Blad1!A:J";
+        private const string ReadRange = "Blad1!A:K";
 
         private static SheetsService GetSheetsService()
         {

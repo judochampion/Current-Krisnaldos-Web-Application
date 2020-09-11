@@ -14,12 +14,11 @@
 
 <div class="row m-0">
     <div class="card-columns">
-
         @foreach (Sponsor lovSponsor in Model.Sponsors)
         {
-        <div class="card border-0 m-1 p-1">
-            <a href="@lovSponsor.Link" title="@lovSponsor.DisplayName"><img src="@lovSponsor.UltimateSource" style="width:100%;display:block;"></a>
-        </div>
+            <div class="card border-0 m-1 p-1">
+                <a href="@lovSponsor.Link" title="@lovSponsor.DisplayName"><img src="@lovSponsor.UltimateSource" style="width:100%;display:block;"></a>
+            </div>
         }
     </div>
 </div>
