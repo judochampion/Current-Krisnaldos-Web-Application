@@ -4,18 +4,19 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using HtmlAgilityPack;
+using WebApplication4.Controllers;
+using WebApplication4.Helpers;
+using WebApplication4.Models.Files;
 
 namespace WebApplication4.Models
 {
     public class KalenderObject
     {
-        public string WebRootPath { get; set; }
-
-        public string RawPathNameToFolderAfterWWWRoot { get; set; }
-
         public List<CalendarEvent> KalenderEvents { get; }
 
         public List<Ploeg> Ploegen { get; }
+
+        public RankingFile Ranking_File { get; }
 
         public List<CalendarEvent> Past_Events
         {
@@ -37,74 +38,21 @@ namespace WebApplication4.Models
 
         public int NumberOfKalenderEvents => KalenderEvents.Count;
 
-        public KalenderObject(List<CalendarEvent> povCalendarEvents, string povWebRootPath, string povRawPathName)
+        public KalenderObject(List<CalendarEvent> povCalendarEvents, List<Ploeg> povPloegen, RankingFile povCurrent_Ranking)
         {
             povCalendarEvents.Sort();
             KalenderEvents = povCalendarEvents;
-            WebRootPath = povWebRootPath;
-            RawPathNameToFolderAfterWWWRoot = povRawPathName;
+            Ploegen = povPloegen;
+            Ranking_File = povCurrent_Ranking;
 
-            //movSponsors = new List<Sponsor>();
-
-            string csvData = System.IO.File.ReadAllText(WebRootPath + RawPathNameToFolderAfterWWWRoot);
-
-            Ploegen = new List<Ploeg>();
-
-            //Execute a loop over the rows.
-            foreach (string row in csvData.Split('\n'))
+            foreach (var lovRankingItem in Ranking_File.RankingItems)
             {
-                if (!string.IsNullOrWhiteSpace(row))
-                {
-                    string[] csvRow = row.Split(':');
-                    if (csvRow[0].StartsWith('-'))
-                    {
-                        //This is the char value that we use to ignore csv-lines.
-                    }
-                    else
-                    {
-                        Ploegen.Add(new Ploeg()
-                        {
-                            Ploegnaam = csvRow[0],
-                            Locatie = csvRow[1],
-                            Adres = csvRow[2]
-                        });
-                    }
-                }
-            }
-
-            WebRequest request = WebRequest.Create("http://rlv.be/klassement-reeks-a-2/");
-            WebResponse response = request.GetResponse();
-            Stream data = response.GetResponseStream();
-            string html = String.Empty;
-            using (StreamReader sr = new StreamReader(data))
-            {
-                html = sr.ReadToEnd();
-            }
-            _ = html;
-
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(html);
-
-            var node1A = doc.DocumentNode.SelectSingleNode("(//table[@id='tablepress-KlasA'])[1]");
-            var node_Body = node1A.SelectSingleNode(".//tbody");
-            var nodes = node_Body.SelectNodes(".//tr");
-
-            foreach (var node in nodes)
-            {
-                var tdnodes = node.SelectNodes(".//td");
-                string lovPositie = tdnodes[0].InnerText;
-                string lovPloegNaam = tdnodes[1].InnerText.ToLower().Trim();
-                string lovPuntenAantal = tdnodes[9].InnerText.ToLower().Trim();
-                if (lovPloegNaam == "geel zwart tube") lovPloegNaam = "gz tube";
-                if (lovPloegNaam == "keukens roberdo") lovPloegNaam = "keuken roberdo";
-
-
                 foreach (Ploeg p in Ploegen)
                 {
-                    if (p.Ploegnaam.ToLower().Trim() == lovPloegNaam)
+                    if (p.Ploegnaam.ToLower().Trim() == lovRankingItem.Ploeg_Naam_In_Lower_Case)
                     {
-                        p.Positie_In_Klassement = lovPositie;
-                        p.Punten_Aantal = lovPuntenAantal;
+                        p.Positie_In_Klassement = lovRankingItem.Klassement_Positie;
+                        p.Punten_Aantal = lovRankingItem.Aantal_Punten;
                     }
                 }
             }
