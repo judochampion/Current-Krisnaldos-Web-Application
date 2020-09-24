@@ -27,6 +27,8 @@ namespace WebApplication4.Controllers
         private const string Suffix_Path_To_Documents_Folder = @"\seed\documents\";
         private const string Input_FileName_Uit_Blad_Front = @"input\blad_uit_front";
         private const string Input_FileName_Uit_Blad_Back = @"input\blad_uit_back";
+        private const string Input_FileName_Thuis_Blad_Front = @"input\blad_thuis_front";
+        private const string Input_FileName_Thuis_Blad_Back = @"input\blad_thuis_back";
         public string Total_Path_To_Document_Folder => WebRootPath + Suffix_Path_To_Documents_Folder;
 
         private const string Extension_Of_Document_Files = "docx";
@@ -70,7 +72,18 @@ namespace WebApplication4.Controllers
                 }
             }
 
-            DocX lovDocument = await Task.Run(() => DocX.Load(Full_Path_From_File_Name(Input_FileName_Uit_Blad_Front, Extension_Of_Document_Files)));
+            CalendarItem lovNextEvent = (await lovKalenderFileTask).First_Upcoming_Event;
+
+            DocX lovDocument;
+
+            if (lovNextEvent.MatchSide == MatchSide.Thuis)
+            {
+                lovDocument = await Task.Run(() => DocX.Load(Full_Path_From_File_Name(Input_FileName_Thuis_Blad_Front, Extension_Of_Document_Files)));
+            }
+            else
+            {
+                lovDocument = await Task.Run(() => DocX.Load(Full_Path_From_File_Name(Input_FileName_Uit_Blad_Front, Extension_Of_Document_Files)));
+            }
 
             for (int i = 1; i <= 15; i++)
             {
@@ -90,8 +103,6 @@ namespace WebApplication4.Controllers
                 }
             }
 
-            CalendarItem lovNextEvent = (await lovKalenderFileTask).First_Upcoming_Event;
-
             lovDocument.ReplaceText("DATE", lovNextEvent.Tijdstip.To_WedstrijdBlad_DateString());
             lovDocument.ReplaceText("WCO", lovNextEvent.MatchCode);
             var lovKapiteinItem = lovSpelerFile.SpelerItems.Where(lovSpelerItem => lovSpelerItem.ID == povSelectedKapiteinID).FirstOrDefault();
@@ -105,6 +116,11 @@ namespace WebApplication4.Controllers
             lovDocument.ReplaceText("TRA-NAAM", "");
             lovDocument.ReplaceText("TRA-NR", "");
 
+            if (lovNextEvent.MatchSide == MatchSide.Thuis)
+            {
+                lovDocument.ReplaceText("UITPLOEG", lovNextEvent.Tegenstander.ToUpper());
+            }
+
             string lovFull_File_Name_DocX_Extension = Full_Path_From_File_Name(lovNextEvent.Tijdstip.To_File_Name_Without_Extension(), Extension_Of_Document_Files);
             lovDocument.SaveAs(lovFull_File_Name_DocX_Extension);
 
@@ -112,16 +128,24 @@ namespace WebApplication4.Controllers
             string lovFull_File_Name_PDF_Extension_Temp = Full_Path_From_File_Name(lovNextEvent.Tijdstip.To_File_Name_Without_Extension() + "_temp", Extension_Of_PDF_Files);
             lovSpireDocument.SaveToFile(lovFull_File_Name_PDF_Extension_Temp, Spire.Doc.FileFormat.PDF);
 
-            string[] lovFiles = new string[] { lovFull_File_Name_PDF_Extension_Temp, Full_Path_From_File_Name(Input_FileName_Uit_Blad_Back, Extension_Of_PDF_Files) };
+            string[] lovFiles;
+
+            if (lovNextEvent.MatchSide == MatchSide.Thuis)
+            {
+                lovFiles = new string[] { lovFull_File_Name_PDF_Extension_Temp, Full_Path_From_File_Name(Input_FileName_Thuis_Blad_Back, Extension_Of_PDF_Files) };
+            }
+            else
+            {
+                lovFiles = new string[] { lovFull_File_Name_PDF_Extension_Temp, Full_Path_From_File_Name(Input_FileName_Uit_Blad_Back, Extension_Of_PDF_Files) };
+            }
+
             string outputFile = Full_Path_From_File_Name($@"output\{lovNextEvent.Tijdstip.To_File_Name_Without_Extension()}", Extension_Of_PDF_Files);
             PdfDocumentBase doc = PdfDocument.MergeFiles(lovFiles);
             doc.Save(outputFile, Spire.Pdf.FileFormat.PDF);
 
             _ = Task.Run(() =>
               {
-                  Thread.Sleep(10000);
                   System.IO.File.Delete(lovFull_File_Name_PDF_Extension_Temp);
-                  Thread.Sleep(10000);
                   System.IO.File.Delete(lovFull_File_Name_DocX_Extension);
               });
 

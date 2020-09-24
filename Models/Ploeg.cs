@@ -9,6 +9,8 @@ namespace WebApplication4.Models
     {
         public string Ploegnaam { get; set; }
 
+        public string Ploegnaam_In_Caps => Ploegnaam.ToUpper();
+
         public string Locatie { get; set; }
 
         public string Adres { get; set; }
