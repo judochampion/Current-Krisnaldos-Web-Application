@@ -19,12 +19,10 @@ namespace WebApplication4.Controllers
 {
     public class KalenderController : Controller
     {
-        private const string Suffix_Path_To_Ranking_Folder = @"\seed\rankings\";
         private const string Suffix_Path_To_Locaties_File = @"\seed\stadia\locaties.txt";
-        public string Total_Path_To_Ranking_Folder => WebRootPath + Suffix_Path_To_Ranking_Folder;
+
         public string Total_Path_To_Locaties_File => WebRootPath + Suffix_Path_To_Locaties_File;
         public string WebRootPath => _env.WebRootPath;
-        private const string Extension_Of_Ranking_Files = "csv";
 
         private readonly ILogger<KalenderController> _logger;
         private readonly IWebHostEnvironment _env;
@@ -37,15 +35,13 @@ namespace WebApplication4.Controllers
 
         public async Task<IActionResult> Index()
         {
-            string lovWebRootPath = _env.WebRootPath;
-
-            Task<RankingFile> lovTaskRanking = Task.Run(() => GetRanking_Sync());
-            Task<List<CalendarEvent>> lovTaskKalenderEvents = GetKalenderEvents_Async();
-            Task<List<Ploeg>> lovTaskGetPloegen = GetPloegen_Async();
-            return View(new KalenderObject(await lovTaskKalenderEvents, await lovTaskGetPloegen, await lovTaskRanking));
+            Task<RankingFile> lovTaskRanking = Task.Run(() => RankingFile.Get_Ranking_File_Sync(WebRootPath));
+            Task<CalendarFile> lovTaskCalendar = Task.Run(() => CalendarFile.Get_Kalender_File_Sync(WebRootPath));
+            Task<List<Ploeg>> lovTaskGetPloegen = Get_Ploegen_Async();
+            return View(new KalenderObject(await lovTaskCalendar, await lovTaskGetPloegen, await lovTaskRanking));
         }
 
-        private async Task<List<Ploeg>> GetPloegen_Async()
+        private async Task<List<Ploeg>> Get_Ploegen_Async()
         {
             var lovPloegenList = new List<Ploeg>();
 
@@ -73,57 +69,6 @@ namespace WebApplication4.Controllers
             }
 
             return lovPloegenList;
-        }
-
-        private async Task<List<CalendarEvent>> GetKalenderEvents_Async()
-        {
-            var lovList = new List<CalendarEvent>();
-            var serviceValues = GetSheetsService().Spreadsheets.Values;
-            var response = await serviceValues.Get(SpreadsheetId, ReadRange).ExecuteAsync();
-            foreach (var lovRow in response.Values.Skip(1))
-            {
-                string[] lovString = new string[lovRow.Count];
-                for (int i = 0; i < lovString.Count(); i++)
-                {
-                    lovString[i] = (string)lovRow[i];
-                }
-                lovList.Add(new CalendarEvent(lovString));
-            }
-            return lovList;
-        }
-
-        private static readonly string[] Scopes = { SheetsService.Scope.Spreadsheets };
-        private const string SpreadsheetId = "1a_nHEghoIFLrN7GLTRNiSxn5MNjsHyX7TTFg2WUdos0";
-        private const string GoogleCredentialsFileName = "kwisnaldos2019-7f67ce0c108f.json";
-        /*
-           Sheet1 - tab name in a spreadsheet
-           A:B     - range of values we want to receive
-        */
-        private const string ReadRange = "Blad1!A:K";
-
-        private static SheetsService GetSheetsService()
-        {
-            using (var stream = new FileStream(GoogleCredentialsFileName, FileMode.Open, FileAccess.Read))
-            {
-                var serviceInitializer = new BaseClientService.Initializer
-                {
-                    HttpClientInitializer = GoogleCredential.FromStream(stream).CreateScoped(Scopes)
-                };
-                return new SheetsService(serviceInitializer);
-            }
-        }
-
-        private RankingFile GetRanking_Sync()
-        {
-            var lovTuple_Test_Result = UpdateController.Is_It_Needed_To_Do_An_Update_For_The_Rankings(Total_Path_To_Ranking_Folder);
-            if (lovTuple_Test_Result.Item1)
-            {
-                return UpdateController.Store_Ranking_To_File(Total_Path_To_Ranking_Folder);
-            }
-            else
-            {
-                return RankingFile.From_File_Path(UpdateController.Get_Latest_Full_Path_File_Name_For_Ranking(Total_Path_To_Ranking_Folder));
-            }
         }
     }
 }

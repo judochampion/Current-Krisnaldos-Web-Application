@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-using HtmlAgilityPack;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,7 +11,7 @@ using WebApplication4.Models.Files;
 
 namespace WebApplication4.Controllers
 {
-    public class UpdateController : Controller
+    public partial class UpdateController : Controller
     {
         private const string Suffix_Path_To_Ranking_Folder = @"\seed\rankings\";
         private const string WebAddressOfRanking = "http://rlv.be/klassement-reeks-a-2/";
@@ -35,6 +31,8 @@ namespace WebApplication4.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.CurrentServerTime = "Current server time: " + DateTime.Now.ToString();
+            ViewBag.LocalTime = "Local time: " + DateTimeExtensions.Now_In_European_Time_Zone().ToString();
             return View();
         }
 
@@ -66,7 +64,7 @@ namespace WebApplication4.Controllers
                     };
                 }
 
-                return View("Index", lovReturnValue);
+                return View("Result", lovReturnValue);
             }
             catch (Exception)
             {
@@ -75,20 +73,15 @@ namespace WebApplication4.Controllers
                     Success = false,
                     Message = $"Something went wrong during the method '{Random_Methods.GetCurrentMethod()}'."
                 };
-                return View("Index", lovUpdate_Result_Fail);
+                return View("Result", lovUpdate_Result_Fail);
             }
-        }
-
-        public IActionResult StoreCurrentCalendarFromGoogleSheet()
-        {
-            return View("Index");
         }
 
         #region Helper Methods
 
         public static RankingFile Store_Ranking_To_File(string povTotal_Path_To_Ranking_Folder)
         {
-            var lovTuple_Test_Result = UpdateController.Is_It_Needed_To_Do_An_Update_For_The_Rankings(povTotal_Path_To_Ranking_Folder);
+            var lovTuple_Test_Result = Is_It_Needed_To_Do_An_Update_For_The_Rankings(povTotal_Path_To_Ranking_Folder);
             string lovNewFullFileName = $"{povTotal_Path_To_Ranking_Folder}{lovTuple_Test_Result.Item2}.{Extension_Of_Ranking_Files}";
             RankingFile lovRankingFile = RankingFile.From_Web_Address(WebAddressOfRanking);
             lovRankingFile.Save(lovNewFullFileName);
@@ -97,8 +90,10 @@ namespace WebApplication4.Controllers
 
         public static (bool, string) Is_It_Needed_To_Do_An_Update_For_The_Rankings(string povTotal_Path_To_Ranking_Folder)
         {
-            DateTime lovNow = DateTime.Now;
+            DateTime lovNow = DateTimeExtensions.Now_In_European_Time_Zone();
             DateTime? lovLatest_Date_Nullable = Get_Latest_Date_Of_Ranking_Stored(povTotal_Path_To_Ranking_Folder);
+            var lovNew_File_Date = lovNow.StartOfWeek(DayOfWeek.Monday);
+
             if (lovLatest_Date_Nullable == null)
             {
                 goto Yes;
@@ -119,13 +114,12 @@ namespace WebApplication4.Controllers
 
         Yes:
             {
-                var lovNew_File_Date = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
-                return (true, $"{lovNew_File_Date.Year}_{lovNew_File_Date.Month}_{lovNew_File_Date.Day}");
+                return (true, lovNew_File_Date.To_File_Name_Without_Extension());
             }
 
         No:
             {
-                return (false, "");
+                return (false, lovNew_File_Date.To_File_Name_Without_Extension());
             }
         }
 
@@ -166,7 +160,7 @@ namespace WebApplication4.Controllers
             else
             {
                 DateTime lovDateTime = (DateTime)lovDateTime_Nullable;
-                string ShortFileName = $"{lovDateTime.Year}_{lovDateTime.Month}_{lovDateTime.Day}";
+                string ShortFileName = lovDateTime.To_File_Name_Without_Extension();
                 return $"{povTotal_Path_To_Ranking_Folder}{ShortFileName}.{Extension_Of_Ranking_Files}";
             }
         }

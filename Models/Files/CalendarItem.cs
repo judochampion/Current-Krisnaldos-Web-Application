@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 
 namespace WebApplication4.Models
 {
@@ -11,11 +8,15 @@ namespace WebApplication4.Models
 
     public enum MatchType { Friendly, Competitie, Beker }
 
-    public class CalendarEvent : IComparable
+    public class CalendarItem : IComparable
     {
+        public const string EigenNaam = "De Krisnaldo's";
+
+        #region Properties
+
         public DateTime Tijdstip { get; }
 
-        public const string EigenNaam = "De Krisnaldo's";
+        public string[] Raw_String_Array_Of_Item { get; }
 
         public MatchSide MatchSide { get; }
         public MatchType MatchType { get; }
@@ -97,23 +98,28 @@ namespace WebApplication4.Models
 
         public bool Score_Known_Yet { get; }
 
-        public CalendarEvent(string[] lovStringArray)
+        public string Item_In_String => string.Join(',', Raw_String_Array_Of_Item);
+
+        #endregion Properties
+
+        public CalendarItem(string[] lovStringArray)
         {
+            Raw_String_Array_Of_Item = lovStringArray;
             Tijdstip = new DateTime(
-                year: Convert.ToInt32(lovStringArray[2]),
-                month: Convert.ToInt32(lovStringArray[1]),
-                day: Convert.ToInt32(lovStringArray[0]),
-                hour: Convert.ToInt32(lovStringArray[3]),
-                minute: Convert.ToInt32(lovStringArray[4]),
+                year: Convert.ToInt32(Raw_String_Array_Of_Item[2]),
+                month: Convert.ToInt32(Raw_String_Array_Of_Item[1]),
+                day: Convert.ToInt32(Raw_String_Array_Of_Item[0]),
+                hour: Convert.ToInt32(Raw_String_Array_Of_Item[3]),
+                minute: Convert.ToInt32(Raw_String_Array_Of_Item[4]),
                 second: 0);
-            MatchType = (MatchType)Enum.Parse(typeof(MatchType), lovStringArray[5], true);
-            MatchSide = (MatchSide)Enum.Parse(typeof(MatchSide), lovStringArray[6], true);
-            Tegenstander = lovStringArray[7];
-            MatchCode = lovStringArray[8];
-            if (lovStringArray.Length > 9)
+            MatchType = (MatchType)Enum.Parse(typeof(MatchType), Raw_String_Array_Of_Item[5], true);
+            MatchSide = (MatchSide)Enum.Parse(typeof(MatchSide), Raw_String_Array_Of_Item[6], true);
+            Tegenstander = Raw_String_Array_Of_Item[7];
+            MatchCode = Raw_String_Array_Of_Item[8];
+            if (Raw_String_Array_Of_Item.Length > 9)
             {
-                Our_Score = Convert.ToInt32(lovStringArray[9]);
-                Their_Score = Convert.ToInt32(lovStringArray[10]);
+                Our_Score = Convert.ToInt32(Raw_String_Array_Of_Item[9]);
+                Their_Score = Convert.ToInt32(Raw_String_Array_Of_Item[10]);
                 Score_Known_Yet = true;
             }
             else
@@ -124,9 +130,9 @@ namespace WebApplication4.Models
 
         public int CompareTo(object obj)
         {
-            if (obj is CalendarEvent)
+            if (obj is CalendarItem)
             {
-                return Tijdstip.CompareTo(((CalendarEvent)obj).Tijdstip);
+                return Tijdstip.CompareTo(((CalendarItem)obj).Tijdstip);
             }
             return 0;
         }

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UserSecretsId>61628ee6-22b9-4544-a6a1-c16838183cdc</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,11 +31,19 @@
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
+    <PackageReference Include="DocXCore" Version="1.0.7" />
+    <PackageReference Include="FreeSpire.Doc" Version="7.11.0" />
     <PackageReference Include="Google.Apis.Auth" Version="1.49.0" />
     <PackageReference Include="Google.Apis.Sheets.v4" Version="1.49.0.2069" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\seed\calendars\" />
+    <Folder Include="wwwroot\seed\documents\" />
+    <Folder Include="wwwroot\seed\rankings\" />
   </ItemGroup>
 
 </Project>

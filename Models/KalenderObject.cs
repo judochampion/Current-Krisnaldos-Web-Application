@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using HtmlAgilityPack;
-using WebApplication4.Controllers;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using WebApplication4.Helpers;
 using WebApplication4.Models.Files;
 
@@ -12,36 +9,21 @@ namespace WebApplication4.Models
 {
     public class KalenderObject
     {
-        public List<CalendarEvent> KalenderEvents { get; }
+        public CalendarFile Calendar_File { get; }
 
         public List<Ploeg> Ploegen { get; }
 
         public RankingFile Ranking_File { get; }
 
-        public List<CalendarEvent> Past_Events
-        {
-            get
-            {
-                var lovNow = DateTime.Now;
-                return KalenderEvents.Where(lovEvent => DateTime.Compare(lovEvent.Tijdstip, lovNow) < 0).ToList();
-            }
-        }
+        public List<CalendarItem> Past_Events => Calendar_File.Past_Events_Sorted;
 
-        public List<CalendarEvent> Future_Events
-        {
-            get
-            {
-                var lovNow = DateTime.Now;
-                return KalenderEvents.Where(lovEvent => DateTime.Compare(lovNow, lovEvent.Tijdstip) < 0).ToList();
-            }
-        }
+        public List<CalendarItem> Future_Events => Calendar_File.Future_Events_Sorted;
 
-        public int NumberOfKalenderEvents => KalenderEvents.Count;
+        public int NumberOfKalenderEvents => Calendar_File.CalendarItems.Count;
 
-        public KalenderObject(List<CalendarEvent> povCalendarEvents, List<Ploeg> povPloegen, RankingFile povCurrent_Ranking)
+        public KalenderObject(CalendarFile povCurrent_Calendar, List<Ploeg> povPloegen, RankingFile povCurrent_Ranking)
         {
-            povCalendarEvents.Sort();
-            KalenderEvents = povCalendarEvents;
+            Calendar_File = povCurrent_Calendar;
             Ploegen = povPloegen;
             Ranking_File = povCurrent_Ranking;
 
@@ -57,7 +39,7 @@ namespace WebApplication4.Models
                 }
             }
 
-            foreach (CalendarEvent lovCE in KalenderEvents)
+            foreach (CalendarItem lovCE in Calendar_File.CalendarItems)
             {
                 foreach (Ploeg p in Ploegen)
                 {

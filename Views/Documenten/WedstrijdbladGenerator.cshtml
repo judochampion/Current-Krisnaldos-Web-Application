@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Wedstrijdblad-Generator";
+}
+@model WebApplication4.ViewModels.WedstrijdbladGeneratorViewModel
+
+<p>Spelers kiezen.</p>
+<form asp-action="WedstrijdBladGenerator">
+    @foreach (var lovSpelerItem in Model.SpelerFile.SpelerItems)
+    {
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="@lovSpelerItem.ID" id="@lovSpelerItem.ID" name="povSelectedSpelerIDsArray">
+            <label class="form-check-label" for="@lovSpelerItem.ID">
+                @lovSpelerItem.DisplayName_In_Lower
+            </label>
+        </div>
+    }
+    <br />
+    <div class="form-group">
+        <label for="kapitein">Selecteer kapitein</label>
+        <select class="form-control" id="kapitein" name="povSelectedKapiteinID">
+            @foreach (var lovSpelerItem in Model.SpelerFile.SpelerItems)
+            {
+                @if (lovSpelerItem.ID.Contains("benjamin"))
+                {
+
+                    <option value="@lovSpelerItem.ID" selected>@lovSpelerItem.DisplayName_In_Lower</option>
+                }
+                else
+                {
+
+                    <option value="@lovSpelerItem.ID">@lovSpelerItem.DisplayName_In_Lower</option>
+                }
+            }
+        </select>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="lav">Selecteer LAV</label>
+        <select class="form-control" id="lav" name="povSelectedLAVID">
+            @foreach (var lovSpelerItem in Model.SpelerFile.SpelerItems)
+            {
+                @if (lovSpelerItem.ID.Contains("joachim"))
+                {
+
+                    <option value="@lovSpelerItem.ID" selected>@lovSpelerItem.DisplayName_In_Lower</option>
+                }
+                else
+                {
+
+                    <option value="@lovSpelerItem.ID">@lovSpelerItem.DisplayName_In_Lower</option>
+                }
+            }
+        </select>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Genereer Wedstrijdblad</button>
+</form>

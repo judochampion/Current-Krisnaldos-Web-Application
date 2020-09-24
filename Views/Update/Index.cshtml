@@ -1,17 +1,10 @@
 ﻿@{
-    ViewData["Title"] = "Update Result";
+    ViewData["Title"] = "Update Possibilities";
 }
-@model UpdateResult
-
-@if (Model.Success)
-{
-    <div class="alert alert-success" role="alert">
-        @Model.Message
-    </div>
-}
-else
-{
-    <div class="alert alert-danger" role="alert">
-        @Model.Message
-    </div>
-}
+<p>Hieronder vindt u enkele update-mogelijkheden.</p>
+<ul>
+    <li><a class="nav-link text-dark" asp-area="" asp-controller="Update" asp-action="StoreCurrentRankingFromRLV">Update Ranking van de  RLV-website.</a></li>
+    <li><a class="nav-link text-dark" asp-area="" asp-controller="Update" asp-action="StoreCurrentCalendarFromGoogleSheet">Update Calendar van Google Drive.</a></li>
+</ul>
+<p>@ViewBag.CurrentServerTime .</p>
+<p>@ViewBag.LocalTime .</p>

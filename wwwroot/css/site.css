@@ -100,3 +100,9 @@ body {
 .dataTables_wrapper {
     font-size: 1em;
 }
+
+input[type=checkbox] {
+    position: relative;
+    vertical-align: text-bottom;
+    bottom: 3px;
+}

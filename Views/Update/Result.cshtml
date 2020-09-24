@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Update Result";
+}
+@model UpdateResult
+
+@if (Model.Success)
+{
+    <div class="alert alert-success" role="alert">
+        @Model.Message
+    </div>
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        @Model.Message
+    </div>
+}
+
+<p>Ga terug naar de <a asp-area="" asp-controller="Update" asp-action="Index">update-pagina</a>. </p>
