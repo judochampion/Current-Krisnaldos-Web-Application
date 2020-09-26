@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace WebApplication4.Models.Files
 {
@@ -9,7 +10,7 @@ namespace WebApplication4.Models.Files
         private const string FileName_Player_File = "2020-2021";
         private const string Suffix_Path_To_Players_Folder = @"\seed\players\";
 
-        public List<SpelerItem> SpelerItems { get; } = new List<SpelerItem>();
+        public List<SpelerItem> SpelerItems { get; set; } = new List<SpelerItem>();
 
         public static string Total_Path_To_Players_File(string povWebRootPath)
         {
@@ -24,6 +25,7 @@ namespace WebApplication4.Models.Files
             {
                 lovSpelerFile.SpelerItems.Add(new SpelerItem(lovLine));
             }
+            lovSpelerFile.SpelerItems = lovSpelerFile.SpelerItems.OrderBy(lovSpeler => lovSpeler.DisplayName_In_Lower).ToList();
             return lovSpelerFile;
         }
 

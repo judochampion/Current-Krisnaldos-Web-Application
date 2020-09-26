@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Wedstrijdblad-Generator Resultaat";
+}
+@model WebApplication4.ViewModels.WedstrijdbladGeneratorResultViewModel
+    <p></p>
+    @if (Model.Was_It_Successful)
+    {
+
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading"> @Model.Message</h4>
+            <p>@Model.Disclaimer</p>
+            <p></p>
+
+            <a href="@Model.Complete_FilePath_To_Result_PDF" download="@Model.FileName" class="btn btn-primary btn-lg active" role="button">
+                Download Wedstrijdblad (PDF)
+            </a>
+        </div>
+
+        <p></p>
+        <p></p>
+        <p>Tegenstander: @Model.Next_Event.Tegenstander.</p>
+
+        <p>Gekozen spelers:</p>
+        <ul>
+            @foreach (var lovSpelerItem in Model.Selected_Spelers)
+            {
+                <li>@lovSpelerItem.DisplayName_In_Lower</li>
+            }
+        </ul>
+        <p>Gekozen kapitein: @Model.Kapitein.DisplayName_In_Lower .</p>
+        <p>Gekozen LAV: @Model.LAV.DisplayName_In_Lower .</p>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            @Model.Message
+        </div>
+    }
+    <br />
+    <p>Ga terug naar de <a asp-area="" asp-controller="Documenten" asp-action="Wedstrijdbladgenerator">wedstrijdbladgenerator</a>.</p>

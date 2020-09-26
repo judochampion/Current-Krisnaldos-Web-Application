@@ -8,9 +8,9 @@
 
         public string FullNameInCaps => $"{Familienaam} {Voornaam}".ToUpper();
 
-        public string DisplayName_In_Lower => $"{Voornaam} {Familienaam}";
+        public string DisplayName_In_Lower => $"{Familienaam} {Voornaam}";
 
-        public string ID => $"{Voornaam}{Familienaam}".ToLower().Replace(" ","");
+        public string ID => $"{Voornaam}{Familienaam}".ToLower().Replace(" ", "");
 
         public string Stamnummer { get; }
 
