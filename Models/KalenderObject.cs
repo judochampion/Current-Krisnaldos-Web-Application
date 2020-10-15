@@ -46,6 +46,7 @@ namespace WebApplication4.Models
                     if (lovCE.Tegenstander.ToLower().Trim() == p.Ploegnaam.ToLower().Trim())
                     {
                         lovCE.TegenstanderPloegObject = p;
+                        lovCE.KrisnaldoPloegObject = povPloegen.Where(p => p.Ploegnaam.Contains("naldo")).FirstOrDefault();
                     }
                 }
             }

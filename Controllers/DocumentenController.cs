@@ -97,16 +97,27 @@ namespace WebApplication4.Controllers
                     string lovFMT = "00";
                     string lovNaamStringToReplace = $"NAAM{i.ToString(lovFMT)}";
                     string lovStamnummerStringToReplace = $"SN{i.ToString(lovFMT)}";
+                    string lovRugnummerStringToReplace = $"R{i.ToString(lovFMT)}";
 
                     if (i <= livNmbOfSelectedSpelers)
                     {
-                        lovDocument.ReplaceText(lovStamnummerStringToReplace, lovSelectedSpelerItems[i - 1].Stamnummer);
-                        lovDocument.ReplaceText(lovNaamStringToReplace, lovSelectedSpelerItems[i - 1].FullNameInCaps);
+                        var lovSelectedSpelerOfThisRow = lovSelectedSpelerItems[i - 1];
+                        lovDocument.ReplaceText(lovStamnummerStringToReplace, lovSelectedSpelerOfThisRow.Stamnummer);
+                        lovDocument.ReplaceText(lovNaamStringToReplace, lovSelectedSpelerOfThisRow.FullNameInCaps);
+                        if (lovSelectedSpelerOfThisRow.HasVastRugnummer)
+                        {
+                            lovDocument.ReplaceText(lovRugnummerStringToReplace, "" + lovSelectedSpelerOfThisRow.Rugnummer);
+                        }
+                        else
+                        {
+                            lovDocument.ReplaceText(lovRugnummerStringToReplace, "");
+                        }
                     }
                     else
                     {
                         lovDocument.ReplaceText(lovStamnummerStringToReplace, "");
                         lovDocument.ReplaceText(lovNaamStringToReplace, "");
+                        lovDocument.ReplaceText(lovRugnummerStringToReplace, "");
                     }
                 }
 
@@ -163,7 +174,7 @@ namespace WebApplication4.Controllers
                     Selected_Spelers = lovSelectedSpelerItems,
                     Kapitein = lovKapiteinItem,
                     LAV = lovLAVItem,
-                    Complete_FilePath_To_Result_PDF = Environment_URL_Seed_Prefix + @$"/documents/output/Wedstrijdblad_KND_Voor_{lovNextEvent.Tijdstip.To_File_Name_Without_Extension() }_{ lovGuid }" + "." + Extension_Of_PDF_Files,
+                    Complete_FilePath_To_Result_PDF = @$"~/seed/documents/output/Wedstrijdblad_KND_Voor_{lovNextEvent.Tijdstip.To_File_Name_Without_Extension() }_{ lovGuid }" + "." + Extension_Of_PDF_Files,
                     Message = "Succesvol gelukt op " + DateTimeExtensions.Now_In_European_Time_Zone().ToString() + "!"
                 }); ;
             }

@@ -31,10 +31,14 @@ namespace WebApplication4.Models
         public string ThuisPloeg => MatchSide == MatchSide.Thuis ? "De Krisnaldo's" : Tegenstander;
 
         public string LocatieDisplay => String.IsNullOrWhiteSpace(Locatie) ? "?" : Locatie;
-        public string Locatie => TegenstanderPloegObject?.Locatie;
+        public string Locatie => ThuisPloegObject?.Locatie;
+
+        public Ploeg KrisnaldoPloegObject { get; set; }
+
+        public Ploeg ThuisPloegObject => (MatchSide == MatchSide.Thuis) ? KrisnaldoPloegObject : TegenstanderPloegObject;
 
         public string AdresDisplay => String.IsNullOrWhiteSpace(Adres) ? "?" : Adres;
-        public string Adres => TegenstanderPloegObject?.Adres;
+        public string Adres => ThuisPloegObject?.Adres;
 
         public int Our_Score { get; }
         public int Their_Score { get; }

@@ -15,7 +15,7 @@ $(document).ready(function () {
             preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
         },
         image: {
-            tError: '<a href="%url%">The afbeelding #%curr%</a> kon niet geladen worden.',
+            tError: '<a href="%url%">De afbeelding #%curr%</a> kon niet geladen worden.',
             titleSrc: function (item) {
                 return item.el.attr('title') + '<small>van de Krisnaldo\'s</small > ';
             }
@@ -66,6 +66,7 @@ $(document).ready(function () {
         {
             responsive: true,
             "ordering": false,
+            scrollX: false,
             "pagingType": "simple",
             "lengthMenu": [[10, -1], [10, "Alle"]],
             "language": {
@@ -94,10 +95,11 @@ $(document).ready(function () {
     $('#kalendertable_past_events').DataTable(
         {
             responsive: true,
+            scrollX: false,
             "ordering": false,
             "paging": false,
             "searching": false,
-            "info":false,
+            "info": false,
             "language": {
                 "sProcessing": "Bezig...",
                 "sLengthMenu": "_MENU_ resultaten weergeven",
