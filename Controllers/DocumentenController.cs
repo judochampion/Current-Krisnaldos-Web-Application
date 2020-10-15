@@ -174,7 +174,7 @@ namespace WebApplication4.Controllers
                     Selected_Spelers = lovSelectedSpelerItems,
                     Kapitein = lovKapiteinItem,
                     LAV = lovLAVItem,
-                    Complete_FilePath_To_Result_PDF = @$"~/seed/documents/output/Wedstrijdblad_KND_Voor_{lovNextEvent.Tijdstip.To_File_Name_Without_Extension() }_{ lovGuid }" + "." + Extension_Of_PDF_Files,
+                    Complete_FilePath_To_Result_PDF = Environment_URL_Seed_Prefix + @$"/documents/output/Wedstrijdblad_KND_Voor_{lovNextEvent.Tijdstip.To_File_Name_Without_Extension() }_{ lovGuid }" + "." + Extension_Of_PDF_Files,
                     Message = "Succesvol gelukt op " + DateTimeExtensions.Now_In_European_Time_Zone().ToString() + "!"
                 }); ;
             }
