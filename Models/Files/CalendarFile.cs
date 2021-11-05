@@ -17,7 +17,7 @@ namespace WebApplication4.Models.Files
         public List<CalendarItem> CalendarItems { get; set; } = new List<CalendarItem>();
 
         private static readonly string[] Scopes = { SheetsService.Scope.Spreadsheets };
-        private const string SpreadsheetId = "1a_nHEghoIFLrN7GLTRNiSxn5MNjsHyX7TTFg2WUdos0";
+        private const string SpreadsheetId = "1WzvZ_6BiSCHmMql_b9o60LSJC5yahZzH3P2bb7eqjxE";
         private const string GoogleCredentialsFileName = "kwisnaldos2019-7f67ce0c108f.json";
         private const string Suffix_Path_To_Calendar_Folder = @"\seed\calendars\";
 

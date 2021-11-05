@@ -7,7 +7,7 @@ namespace WebApplication4.Models.Files
     public class SpelerFile
     {
         private const string Extension_Of_Player_File = "csv";
-        private const string FileName_Player_File = "2020-2021";
+        private const string FileName_Player_File = "2021-2022";
         private const string Suffix_Path_To_Players_Folder = @"\seed\players\";
 
         public List<SpelerItem> SpelerItems { get; set; } = new List<SpelerItem>();
