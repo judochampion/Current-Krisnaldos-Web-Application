@@ -63,8 +63,9 @@ namespace WebApplication4.Models.Files
                 string lovPositie = tdnodes[0].InnerText;
                 string lovPloegNaam = tdnodes[1].InnerText.ToLower().Trim();
                 string lovPuntenAantal = tdnodes[9].InnerText.ToLower().Trim();
-                if (lovPloegNaam == "geel zwart tube") lovPloegNaam = "gz tube";
-                if (lovPloegNaam == "keukens roberdo") lovPloegNaam = "keuken roberdo";
+                if (lovPloegNaam == "gz tube") lovPloegNaam = "geel zwart tube";
+                if (lovPloegNaam == "keuken roberdo") lovPloegNaam = "keukens roberdo";
+                if (lovPloegNaam == "roberdo keuken") lovPloegNaam = "keukens roberdo";
                 lovRankingFile.RankingItems.Add(new RankingItem()
                 {
                     Ploeg_Naam_In_Lower_Case = lovPloegNaam,

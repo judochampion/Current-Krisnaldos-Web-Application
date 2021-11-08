@@ -14,7 +14,7 @@ namespace WebApplication4.Models
         {
             get
             {
-                return @"http://www.krisnaldos.be/seed/sponsors/compressed/" + RawPictureName;
+                return @"https://www.krisnaldos.be/seed/sponsors/compressed/" + RawPictureName;
             }
         }
     }
