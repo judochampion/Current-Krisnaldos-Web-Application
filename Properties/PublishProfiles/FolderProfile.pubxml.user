@@ -7,6 +7,6 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <_PublishTargetUrl>H:\WebApplication4\WebApplication4\bin\Release\netcoreapp3.0\publish\</_PublishTargetUrl>
-    <History>True|2021-11-08T08:34:56.1942120Z;True|2021-11-06T21:15:15.9788838+01:00;False|2021-11-06T21:13:22.9492867+01:00;True|2021-11-06T20:43:37.6872566+01:00;</History>
+    <History>True|2021-12-02T12:30:55.1147163Z;True|2021-11-15T13:12:57.3863192+01:00;True|2021-11-14T22:55:12.0739459+01:00;False|2021-11-14T22:53:12.7905744+01:00;True|2021-11-08T09:34:56.1942120+01:00;True|2021-11-06T21:15:15.9788838+01:00;False|2021-11-06T21:13:22.9492867+01:00;True|2021-11-06T20:43:37.6872566+01:00;</History>
   </PropertyGroup>
 </Project>
