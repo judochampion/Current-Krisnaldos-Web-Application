@@ -2,5 +2,6 @@
 **/obj/
 bin/
 obj/
+.vs/
 wwwroot/
 kwisnaldos2019-7f67ce0c108f.json
