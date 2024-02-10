@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "kwisnaldos2019",
+  "private_key_id": "47ef8ef501b81c29df647c63569844cfce4d5f43",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDG909Sp6qGYQf3\nX5DwTFsCaxn1Mu6sWsuHzxKAqqJQyAgRj+zaM1SHqW9wAeHGT0JEkWkkTLb+Tslc\n+I1IN2ijD9HnL6g2hZ7DYOmSp+epQz+abYLCsdThGr7BhYl/skKcdy/J0e5gyJQJ\n1GzmBe9/feUWzeSQiNe6xE/0bcw/XkSX/7yAcD18HK2kebwT0Lx6XLiZpHG5/Aaz\nxOott7PtLW2Kypy6/DBEpFu8r0hyyeOGCXMJEXIPSSW8ydNTGF3dT+5wv8sHaFq5\njX1nhzPMGGz+0kE9XcVP1aFGZDlO9gT85DyjmSIdix46zoGdIXqLDN7HCHNh64cd\nOskL3Zj9AgMBAAECggEAHmZ8Lr9ijTy3KGNoNGceQrzVjwL0t835qisIAzPPMDOY\nFALfKCnOoRnQ5pbLBe9nSy3CmGLGVQ35s2Rgxed9a+jHZCECfS4mZ2jf12IjQdf+\nGFziLVhZk/lvqwb5ztKQXfLSEO6sEwqin+vepbjDcsHsJnNYGINoHufO5aR/IDFE\nZEcK4Wr7z7crwGUGK3haDbstb4eWFs//jMqWA2sNWXDii9rAOx26R5VfkfSF5yMJ\nSz7ic5miig+mHF20mcnX/HAr72j2FeuWRg/scXhRUFoRouTR04LRqOH7sw7MnDeB\nVR2X/jcT/HDhnJVABH7erBqEKvLiF2RfxWxqcpyNOwKBgQD2MVTOHlmNhugRi1Cc\n7Fb1iatEuIrXk1ksDn3BKEFOdDAEreyI+8iOYGjdjBva2bzTrjw8S5C8PX6jPrth\ny1+TliNx12x6rO0MFn+2LlaQ9NtQTV5uSNQF0O4wBnbNLT0u9RCp921KZU2MFPLZ\nTEkdbu1no6OZSMYcEjFZClpmGwKBgQDO5FyyXoNPKWxoQzi6T7CM8VoamW02Brpq\ni9zGQwJ9CAkbLQiDfzznDQ57IFOey2dfrUGOrFIP++SBZIiyz9Fj0S9dtrcyxvbi\nwnF1OY3T7BPcyw6xsuhjGM39Zg7yfaCCXUs0L/jpO0ehKyQObkyraukyGXxsG8R7\nf+rglTROxwKBgQCOBhFlQu7ojU3taRAdJt5XkY7i+w7lpBRKLSXwuzdJeg+Fc4xD\nzfR55jY4sK4VB40+FIKdSf56CYO3yuWwWfGOI4vZDax/7KhnU8djIsI/p3GplqiG\nOK9Pl6MAw4nffVyRbUCqvJko1N3ylNcv8ikvuKFuK2GiePAIm5oqQqW5xwKBgGXz\nhHZlOqG80O4ECiVNdbvOh09KQdX4tM4iQ9XzWXuRhSM+Ks7Z2YImHfews2Qx6avt\nLbwH0JyNzUmx5+btn8pnX8b3bgl4oFqX5N8WUHyY/iS0b3ZDql6C76cqLr1yCLGV\nFaUO6sLL8n1KTAdMdT2XfniwtG51tHoDTBQFknQrAoGBALfBd3Ng+dYoQl1bQ2Re\n8sLsfM3zupW8cVw5IY/LSQbBh3M0UsJpDuY3hppDufhVFi1mgpHPf5FksTtS7A9L\no5t6uOJl9w/6i35Fu3pwFlUHtsfdKLXRVCWCYI+v5KWD+1fyEYFykwbOZ3EAU4QB\nPsQv2HwUKK5weQvYaJtmHt/H\n-----END PRIVATE KEY-----\n",
+  "client_email": "kwisnaldoservacc@kwisnaldos2019.iam.gserviceaccount.com",
+  "client_id": "104959309452183411253",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/kwisnaldoservacc%40kwisnaldos2019.iam.gserviceaccount.com"
+}

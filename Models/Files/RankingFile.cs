@@ -66,6 +66,7 @@ namespace WebApplication4.Models.Files
                 if (lovPloegNaam == "gz tube") lovPloegNaam = "geel zwart tube";
                 if (lovPloegNaam == "keuken roberdo") lovPloegNaam = "keukens roberdo";
                 if (lovPloegNaam == "roberdo keuken") lovPloegNaam = "keukens roberdo";
+                if (lovPloegNaam == "kvk denys") lovPloegNaam = "vk denys";
                 lovRankingFile.RankingItems.Add(new RankingItem()
                 {
                     Ploeg_Naam_In_Lower_Case = lovPloegNaam,

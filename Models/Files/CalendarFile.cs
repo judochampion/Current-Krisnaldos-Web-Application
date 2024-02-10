@@ -18,7 +18,7 @@ namespace WebApplication4.Models.Files
 
         private static readonly string[] Scopes = { SheetsService.Scope.Spreadsheets };
         private const string SpreadsheetId = "1WzvZ_6BiSCHmMql_b9o60LSJC5yahZzH3P2bb7eqjxE";
-        private const string GoogleCredentialsFileName = "kwisnaldos2019-7f67ce0c108f.json";
+        private const string GoogleCredentialsFileName = "kwisnaldos2019-47ef8ef501b8.json";
         private const string Suffix_Path_To_Calendar_Folder = @"\seed\calendars\";
 
         /*
